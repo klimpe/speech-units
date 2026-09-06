@@ -46,6 +46,12 @@ drivers) rather than turnkey command-line tools. Concretely:
   code](#third-party-code-not-included)), so `segmentools/eval/` will not
   import as-is — install `nltk` and `scikit-learn` and reconstruct
   `kappa.py` from the linked gist if you need it working again.
+- `segmentools/eval/eval.py` also imports
+  [**segeval**](https://github.com/cfournie/segmentation.evaluation) (the
+  Boundary Similarity metric used in the LREC'14 paper) — this was always
+  a genuine external dependency, never vendored, so just `pip install
+  segeval` (Python 2-era versions only; it has not been maintained for
+  Python 3 either).
 - `metaeval/`'s scripts (`testdmg*.py`, `metaeval_run.py`, etc.) were run
   from a Python path that also had `segmentools/` and the vendored
   annotation-format library (see below) importable; they are not
@@ -129,6 +135,12 @@ it yourself:
 - **NLTK** and **scikit-learn** — standard PyPI packages
   (`nltk.metrics.agreement`, `sklearn.metrics`) that earlier versions of
   `segmentools/eval/` vendored a copy of; install them from PyPI instead.
+- **[segeval](https://github.com/cfournie/segmentation.evaluation)**
+  (Chris Fournier) — the Boundary Similarity metric implementation used by
+  `segmentools/eval/eval.py`. Unlike the tools above, this one was never
+  vendored in the original codebase; it was always a plain external
+  dependency (`pip install segeval`), listed here only so the import in
+  `eval.py` doesn't look unexplained.
 - A small Cohen's-kappa implementation from
   [yorchopolis/kappa-stats](https://github.com/yorchopolis/kappa-stats).
 
